@@ -1,0 +1,5 @@
+<ul class="list-unstyled sub-navbar-list">
+    <li *ngFor="let tempSideNavbarItem of sideNavbarItems">
+        <button (click)="openOption(tempSideNavbarItem.itemUrl)" class="sub-navbar-button">{{ tempSideNavbarItem.itemText }}</button>
+    </li>
+</ul>

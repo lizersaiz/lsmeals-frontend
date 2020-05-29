@@ -1,0 +1,24 @@
+.customer-statistics-container{
+
+  height: 100%;
+  width: 100%;
+  padding: 3rem;
+}
+
+.row-selector{
+
+  height: 20%;
+  width: 100%;
+}
+
+.row-chart{
+
+  height: 80%;
+  width: 100%;
+}
+
+label{
+
+  display: block;
+  color: rgb(239, 245, 245);
+}

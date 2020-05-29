@@ -1,0 +1,33 @@
+<form [formGroup] = "customerStatistics" class="customer-statistics-container">
+
+  <div class="row-selector row">
+    <div class="col-1"></div>
+    <div class="col">
+
+    <!-- CHART OPTION SELECTOR -->
+      <label>Subject</label>
+      <select formControlName="subjectSelector" (change)="configureChart()" class="custom-input">
+        <option *ngFor="let option of subjectSelectorOpts">
+          {{ option["name"] }}
+        </option>
+      </select>
+
+    </div>
+    <div *ngIf="subjectSelector.value !== ''" class="col">
+
+      <!-- DATE PICKER COMPONENT-->
+      <app-date-picker #datePicker (change)="configureChart()" ></app-date-picker>
+
+   </div>
+   <div class="col-1"></div>
+  </div>
+
+  <!-- CHART CONTENT -->
+  <div class="row-chart row">
+    <div class="col">
+
+      <app-chart></app-chart>
+
+    </div>
+  </div>
+</form>

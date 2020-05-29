@@ -1,0 +1,21 @@
+<form [formGroup]="dateForm" class="date-form">
+  <div class="row">
+    <div class="col-5">
+
+      <label>Year</label>
+      <select formControlName="year" class="custom-input">
+        <option *ngFor="let year of years"> {{ year }} </option>
+      </select>
+
+    </div>
+    <div class="col-2"></div>
+    <div *ngIf="year.value !== ''" class="col-5">
+
+      <label>Month</label>
+      <select formControlName="month" class="custom-input">
+        <option *ngFor="let tempMonth of months" [ngValue]="tempMonth"> {{ tempMonth.value }} </option>
+      </select>
+
+    </div>
+  </div>
+</form>

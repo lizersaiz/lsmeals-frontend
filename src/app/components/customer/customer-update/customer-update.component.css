@@ -1,0 +1,15 @@
+input{
+
+    display: block;
+}
+
+.col{
+    margin-left: 15% !important;
+    margin-top: 4rem !important;
+}
+
+button{
+
+    margin-left: 46% !important;
+    margin-top: 2rem !important;
+}

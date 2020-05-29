@@ -1,0 +1,8 @@
+<div [@visibilityChanged]="isVisible">
+  <ngb-alert *ngIf="successMessage"
+              type="success"
+              (close)="successMessage = ''"
+              class="info-bar">
+    {{ successMessage }}
+  </ngb-alert>
+</div>

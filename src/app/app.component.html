@@ -1,0 +1,53 @@
+<div class="container-fluid background page-wrapper">
+
+  <!-- title -->
+  <section id="title" class="row">
+    <div class="title-logo title-col col-md-2">
+
+      <div id="title-text-container">
+        <label class="title-text-name">LSMeals</label>
+        <label class="title-text-slogan">Your web for quality meals</label>
+      </div>
+
+      <div id="title-image">
+        <img src="assets/images/logo/logo.png" alt="LSMeals" id="title-image">
+      </div>
+
+    </div>
+    <div class="col-md-4"></div>
+
+    <!-- TODO i18n component -->
+    <div class="placeholder-label-container-i18n title-col col-md-2">
+      <label class="placeholder-label">Here goes i18n component</label>
+    </div>
+
+    <!-- TODO login component-->
+    <div class="placeholder-label-container-login title-col col-md-4">
+      <label class="placeholder-label">Here goes login component</label>
+    </div>
+
+  </section>
+
+  <!-- main navigation bar -->
+  <app-navbar-main></app-navbar-main>
+
+  <!-- left sub-navigation bar + main content -->
+  <section class="sub-nav-content row">
+
+    <!-- left sub-navigation bar -->
+    <nav id="sub-navbar" class="col-md-2 sub-navbar-container">
+      <app-navbar-side></app-navbar-side>
+    </nav>
+
+    <!-- main content router -->
+    <main role="main" class="main-content col-md-10">
+      <router-outlet></router-outlet>
+      <app-info-bar></app-info-bar>
+    </main>
+
+  </section>
+
+  <footer class="row">
+    <label>© 2020, LSMeals by Lizer Saiz</label>
+  </footer>
+</div>

@@ -1,0 +1,24 @@
+.col {
+
+  padding: 0 0.3rem;
+  margin: 0.3rem 0;
+}
+
+.col:first-child {
+
+  padding: 0 0.3rem 0 0.6rem;
+}
+
+.col:last-child {
+
+  padding: 0 0.6rem 0 0.3rem;
+}
+
+#main-navbar button {
+
+  height: 100%;
+  width: 100%;
+  border: 2px groove #626569;
+  background-color: #343a40;
+  color: rgb(239, 245, 245);
+}

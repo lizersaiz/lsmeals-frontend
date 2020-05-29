@@ -1,0 +1,75 @@
+.customer-table-wrapper {
+
+  height: 100%;
+  width: 100%;
+  padding: 1.5rem 3rem 4rem 3rem;
+}
+
+.scroll-y {
+
+  display: block;
+  overflow-y: scroll;
+  height: 90%;
+  width: 100%;
+  background-color: white;
+}
+
+.paginator{
+
+  height: 10%;
+}
+
+#customer-table{
+
+  margin-bottom: 0;
+}
+
+th{
+
+  padding: 0.5rem 0 0.5rem 0.5rem;
+}
+
+td{
+
+  color: black;
+  padding: 0.5rem 0 0.5rem 0.5rem;
+}
+
+button{
+
+  width: 50%;
+  height: 100%;
+  border: 2px groove #626569;
+  background-color: #343a40;
+  color: rgb(239, 245, 245);
+}
+
+.td-button{
+
+  padding:5px;
+}
+/*
+@media(min-width: 576px) {
+    .my-custom-scrollbar {
+        height: 100px;
+    }
+}
+
+@media(min-width: 768px) {
+    .my-custom-scrollbar {
+        height: 300px;
+    }
+}
+
+@media(min-width: 992px) {
+    .my-custom-scrollbar {
+        height: 500px;
+    }
+}
+
+@media(min-width: 1200px) {
+    .my-custom-scrollbar {
+        height: 700px;
+    }
+}
+*/

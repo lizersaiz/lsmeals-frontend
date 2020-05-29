@@ -1,0 +1,24 @@
+.modal-header, .modal-footer{
+
+  background-color: rgb(255, 200, 0);
+}
+
+.modal-button{
+
+  background-color: rgb(255, 170, 0);
+}
+
+.modal-body{
+
+  background-color: rgb(255, 230, 0);
+}
+
+#cancelButtonContainer{
+
+  display: inline;
+}
+
+li {
+
+  list-style-type: none;
+}

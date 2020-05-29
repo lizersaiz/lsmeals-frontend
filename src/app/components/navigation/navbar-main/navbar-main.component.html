@@ -1,0 +1,5 @@
+<nav id="main-navbar" class="row" >
+    <div class="col" *ngFor="let tempItem of navbarItems">
+        <button (click)="populateSideNavbar(tempItem)" class="navbar-button">{{ tempItem }}</button>
+    </div>
+</nav>

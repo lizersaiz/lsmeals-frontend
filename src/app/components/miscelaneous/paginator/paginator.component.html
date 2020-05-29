@@ -1,0 +1,8 @@
+<div class="paginator-wrapper">
+  <mat-paginator class="paginator"
+                  [length]="length"
+                  (pageSize)="pageSize"
+                  [pageSizeOptions]="pageSizeOptions"
+                  (page)="pageChanged($event)">
+  </mat-paginator>
+</div>
