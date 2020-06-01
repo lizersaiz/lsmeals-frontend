@@ -1,27 +1,27 @@
 <div class="customer-table-wrapper">
   <div class="scroll-y table-responsive">
 
-      <table id="customer-table" class="table table-bordered table-hover table-striped table-sm table-light">
-        <thead class="thead-dark">
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Manage</th>
-        </thead>
-        <tbody>
-            <tr *ngFor="let tempCustomer of customers">
-                <td>{{ tempCustomer.firstName }}</td>
-                <td>{{ tempCustomer.lastName }}</td>
-                <td>{{ tempCustomer.email }}</td>
-                <td>{{ tempCustomer.phone }}</td>
-                <td class="td-button">
-                    <button (click)="updateCustomer(tempCustomer)">Update</button>
-                    <button (click)="deleteCustomer(tempCustomer)">Delete</button>
-                </td>
-            </tr>
-        </tbody>
-      </table>
+    <table id="customer-table" class="table table-bordered table-hover table-striped table-sm table-light">
+      <thead class="thead-dark">
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Manage</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tempCustomer of customers">
+          <td>{{ tempCustomer.firstName }}</td>
+          <td>{{ tempCustomer.lastName }}</td>
+          <td>{{ tempCustomer.email }}</td>
+          <td>{{ tempCustomer.phone }}</td>
+          <td class="td-button">
+            <button (click)="updateCustomer(tempCustomer.id)">Update</button>
+            <button (click)="deleteCustomer(tempCustomer)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
   </div>
 

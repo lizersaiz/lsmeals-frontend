@@ -1,21 +1,66 @@
+.modal-container{
+
+  border-radius: 0.25rem;
+  border: 2px solid black;
+}
+
 .modal-header, .modal-footer{
 
-  background-color: rgb(255, 200, 0);
+  font-size: 16.5px;
+  font-weight: 500;
+  color: black;
+  background-color: rgb(255, 238, 0);
+  padding: 0;
+}
+
+.modal-header {
+
+  border-bottom: 1px solid black;
+}
+
+.modal-footer {
+
+  border-top: 1px solid black;
+}
+
+.modal-title {
+
+  line-height: 1;
+  margin: 5px 5px 5px 10px;
 }
 
 .modal-button{
 
-  background-color: rgb(255, 170, 0);
+  font-size: 12px;
+  font-weight: 500;
+  color: white;
+  background-color: #343a40;
+  margin: 6px;
+  padding: 6px 9px;
+}
+
+#cancelButtonContainer button {
+
+  margin: 6px 6px 6px 0px;
 }
 
 .modal-body{
 
-  background-color: rgb(255, 230, 0);
+  font-size: 16px;
+  font-weight: 200;
+  color: black;
+  background-color: white;
 }
 
 #cancelButtonContainer{
 
   display: inline;
+}
+
+ul {
+
+  margin: 0;
+  padding: 0;
 }
 
 li {

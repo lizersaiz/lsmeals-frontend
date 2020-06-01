@@ -1,6 +1,6 @@
 export class Customer {
 
-    private _id: string;
+    private _id: number;
     private _firstName: string;
     private _lastName: string;
     private _email: string;
@@ -15,10 +15,10 @@ export class Customer {
       this._userPass = userPass;
     }
 
-    public get id(): string {
+    public get id(): number {
         return this._id;
     }
-    public set id(value: string) {
+    public set id(value: number) {
         this._id = value;
     }
     public get firstName(): string {

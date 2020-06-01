@@ -2,17 +2,17 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NavbarMainComponent } from './navbar-main.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { NabvarService } from 'src/app/services/nabvar.service';
+import { NavigationService } from 'src/app/services/navigation.service';
 
 describe('NavbarMainComponent', () => {
   let component: NavbarMainComponent;
   let fixture: ComponentFixture<NavbarMainComponent>;
-  let navbarServiceSpy: any;
+  let navigationServiceSpy: any;
 
   beforeEach(async(() => {
 
-    navbarServiceSpy = jasmine.createSpyObj("NabvarService", ['populateNavbar']);
-    navbarServiceSpy.populateNavbar.and.returnValue([]);
+    navigationServiceSpy = jasmine.createSpyObj("NavigationService", ['populateNavbar']);
+    navigationServiceSpy.populateNavbar.and.returnValue([]);
 
     TestBed.configureTestingModule({
       declarations: [
@@ -22,7 +22,7 @@ describe('NavbarMainComponent', () => {
         RouterTestingModule
       ],
       providers:[
-        {provide: NabvarService, useValue: navbarServiceSpy}
+        {provide: NavigationService, useValue: navigationServiceSpy}
       ]
     })
     .compileComponents();

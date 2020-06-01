@@ -27,7 +27,7 @@ export class ModalPopupComponent {
 
   openVerticallyCentered(customer: Customer): Promise<string> {
 
-    const modalRef = this.modalService.open(ModalPopupContent, { centered: true, size: "lg" });
+    const modalRef = this.modalService.open(ModalPopupContent, { centered: true, size: "sm" });
     modalRef.componentInstance.title = 'Are you sure you want to delete this customer?';
     modalRef.componentInstance.body = customer;
     modalRef.componentInstance.cancelButton = true;

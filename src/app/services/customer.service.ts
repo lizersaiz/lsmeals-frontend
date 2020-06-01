@@ -1,20 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Customer } from '../common/customer';
-import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
-import { InfoBarService } from './bootstrap/info-bar.service';
+import { Subject, Observable } from 'rxjs';
 import { PaginatorService } from './paginator.service';
+import { NavigationService } from './navigation.service';
+import { InfoBarService } from './bootstrap/info-bar.service';
 
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * This is the service reference when working with customer entity.
+ * Any service not directly related to customer as an Angular component
+ * is injected here. Invoque them by calling the methods available
+ */
 export class CustomerService {
 
-  // for customer update component
-  updatingCustomer: Subject<Customer> = new Subject<Customer>();
 
-  // for customer list component
+  // Makes the list of customers available for subscription
   listedCustomers: Subject<Customer[]> = new Subject<Customer[]>();
 
   // for customer list pagination; properties and event to look at
@@ -27,11 +30,18 @@ export class CustomerService {
   baseUrl = "http://localhost:8080/api/customers"
 
   constructor(private httpClient: HttpClient,
-              private router: Router,
-              private infoBarService: InfoBarService,
-              private paginatorService: PaginatorService) {
+              private navigationService: NavigationService,
+              private paginatorService: PaginatorService,
+              private infoBarService: InfoBarService) {
 
-    // subscribe to paginator service for http requests
+    this.paginatorServiceSubscription();
+  }
+
+  /**
+   * Subscribe to paginator service for http get requests
+   */
+  private paginatorServiceSubscription() {
+
     this.paginatorService.pageIndex.subscribe(
       data => {
         this.pageIndex = data;
@@ -47,9 +57,19 @@ export class CustomerService {
     )
   }
 
+  /**
+   * Makes a http request to back end application, to retrieve a customer
+   * @param customerId The customer id
+   */
+  getCustomerHttp(customerId: number): Observable<Customer> {
+
+    let baseUrlAndPageParams = `${this.baseUrl}/${customerId}`
+    return this.httpClient.get<Customer>(baseUrlAndPageParams);
+  }
 
   /**
-   * Makes an http request to back end application, given pagination values
+   * Makes a http request to back end application, given pagination values
+   * to retrieve a list of customers
    * @param freshPage Variable used to trick case 0, onInit
    */
   getCustomersHttpPaginate(freshPage: boolean) {
@@ -71,10 +91,14 @@ export class CustomerService {
     );
   }
 
-  createCustomerHttp(customer: Customer) {
+  /**
+   * Makes a http request to create a customer
+   * @param customer The customer to create
+   */
+  createCustomerHttp(customer: Customer): Observable<Customer> {
 
     let response: any;
-    this.httpClient.post<Customer>(this.baseUrl,
+    return this.httpClient.post<Customer>(this.baseUrl,
       {
         "firstName": customer.firstName,
         "lastName": customer.lastName,
@@ -86,30 +110,30 @@ export class CustomerService {
         headers: {
           'Content-Type': 'application/json'
         }
-    }).subscribe(
-      (data) => response = data
+      }
     );
-
-    this.infoBarService.giveSuccessMessage("createCustomer");
   }
 
-  updateCustomerHttp(customer: Customer){
+  /**
+   * Makes a http request to update a customer
+   * @param customer The customer to update
+   */
+  updateCustomerHttp(customer: Customer): Observable<Customer> {
 
     const withArgUrl = `${this.baseUrl}/${customer.id}`;
 
-    let response: any;
-    this.httpClient.put<Customer>(withArgUrl, customer, {
+    return this.httpClient.put<Customer>(withArgUrl, customer, {
       headers: {
         'Content-Type': 'application/json'
       }
-    }).subscribe(
-      data => response = data
-    );
-
-    this.infoBarService.giveSuccessMessage("updateCustomer");
+    });
   }
 
-  deleteCustomerHttp(customer: Customer){
+  /**
+   * Makes a http request to delete a customer
+   * @param customer The customer to delete
+   */
+  deleteCustomerHttp(customer: Customer) {
 
     const withArgUrl = `${this.baseUrl}/${customer.id}`
 
@@ -122,36 +146,33 @@ export class CustomerService {
       }
     );
 
-    this.infoBarService.giveSuccessMessage("deleteCustomer");
+    this.displayInfoBar("success", "deleteCustomer");
   }
 
   /**
-   * Makes the redirection to update form
-   * @param customer The customer being updated
+   * Asks navigation service to route to a url
+   * @param url The url to route to
    */
-  navigateToUpdateCustomer(customer: Customer){
+  navigate(url: string) {
 
-    this.updatingCustomer.next(customer);
-    this.router.navigateByUrl("/customer/update");
+    this.navigationService.routeTo(url);
   }
 
   /**
-   * For the case when page is refreshed, it wont contain a customer, so perform redirection to the list
+   * Asks infobar to get displayed
+   * @param messageType The infobar type
+   * @param message The message
    */
-  redirectToCreateCustomer(){
+  displayInfoBar(messageType: string, message: string) {
 
-    this.router.navigateByUrl("/customer/list");
+    if (messageType === "success"){
+
+      this.infoBarService.giveSuccessMessage(message);
+    }
   }
 }
 
-interface GetResponseCustomer{
-
-  _embedded: {
-    customers: Customer[];
-  }
-}
-
-interface GetResponseCustomerPaginate{
+interface GetResponseCustomerPaginate {
 
   _embedded: {
     customers: Customer[];

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NabvarService } from 'src/app/services/nabvar.service';
+import { NavigationService } from 'src/app/services/navigation.service';
 
 
 @Component({
@@ -12,7 +12,7 @@ export class NavbarMainComponent implements OnInit {
 
   navbarItems: string[] = [];
 
-  constructor(private navbarService: NabvarService) { }
+  constructor(private navigationService: NavigationService) { }
 
   ngOnInit(): void {
 
@@ -21,11 +21,11 @@ export class NavbarMainComponent implements OnInit {
 
   populateNavbar(){
 
-    this.navbarItems = this.navbarService.populateNavbar();
+    this.navbarItems = this.navigationService.populateNavbar();
   }
 
   populateSideNavbar(navbarType: string){
 
-    this.navbarService.populateSideNavbar(navbarType);
+    this.navigationService.populateSideNavbar(navbarType);
   }
 }

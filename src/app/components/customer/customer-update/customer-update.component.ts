@@ -1,49 +1,96 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CustomerService } from 'src/app/services/customer.service';
 import { Customer } from 'src/app/common/customer';
-import { InputValidatorService } from 'src/app/services/input-validator-service';
+import { FormValidatorService } from 'src/app/services/forms/form-validator.service';
+import { CustomerWriteComponent } from '../customer-write/customer-write.component';
+import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-customer-update',
-  templateUrl: './customer-update.component.html',
-  styleUrls: ['./customer-update.component.css']
+  templateUrl: '../customer-write/customer-write.component.html',
+  styleUrls: ['../customer-write/customer-write.component.css']
 })
-export class CustomerUpdateComponent implements OnInit {
+export class CustomerUpdateComponent extends CustomerWriteComponent implements OnInit {
 
-  customer: Customer = new Customer("", "", "", "", "");
+  updatingCustomer: Customer;
 
-  constructor(private customerService: CustomerService,
-              private inputValidatorService: InputValidatorService) { }
+  constructor(public customerService: CustomerService,
+              public formValidatorService: FormValidatorService,
+              private activatedRoute: ActivatedRoute){
 
-  ngOnInit(): void {
+    super(customerService, formValidatorService);
 
-    this.populateCustomer();
+    this.operation = "Update";
+
   }
 
-  populateCustomer(){
+  ngOnInit(){
 
-    this.customerService.updatingCustomer.subscribe(
+    this.getUpdatingCustomer();
+  }
+
+  /**
+   * Gets the customer that is going to be updated by retrieving
+   * its id from the url, and making Customer Service get it via http
+   */
+  private getUpdatingCustomer(){
+
+    // obtain customer id from route param and get it via Http
+    this.activatedRoute.paramMap.pipe(
+      switchMap(params => {
+        let customerId = Number(params.get("customerId"));
+        return this.customerService.getCustomerHttp(customerId);
+      })
+    // subscribe to it and initialise the form values
+    ).subscribe(
       data => {
-        this.customer = data;
-        this.customer === undefined ? this.customerService.redirectToCreateCustomer() : true;
+        this.updatingCustomer = data;
+        this.initFormValues();
       }
     )
   }
 
-  updateCustomer(){
+  /**
+   * Initialises the form values
+   */
+  private initFormValues(){
 
-    this.customerService.updateCustomerHttp(this.customer);
+    this.firstName.setValue(this.updatingCustomer.firstName);
+    this.lastName.setValue(this.updatingCustomer.lastName);
+    this.updatingCustomer.phone !== undefined ? this.phone.setValue(this.updatingCustomer.phone) : this.phone.setValue("");
+    this.email.setValue(this.updatingCustomer.email);
+    this.password.setValue(this.updatingCustomer.userPass);
   }
 
-  checkEmptyFields(): boolean{
+  /**
+   * Inherits for performing customer update operation,
+   * if successful, will redirect to customer list component and
+   * display a success message
+   */
+  writeCustomer(){
 
-    if(this.inputValidatorService.isEmpty(this.customer.firstName) ||
-       this.inputValidatorService.isEmpty(this.customer.lastName) ||
-       this.inputValidatorService.isEmpty(this.customer.email) ||
-       this.inputValidatorService.isEmpty(this.customer.phone)){
+    // retrieve the customer built from form controls
+    let customer = super.writeCustomer();
+    if ( customer ){
 
-      return false;
+      // update the customer
+      this.updatingCustomer.firstName = customer.firstName;
+      this.updatingCustomer.lastName = customer.lastName;
+      this.updatingCustomer.email = customer.email;
+      this.updatingCustomer.userPass = customer.userPass;
+
+      // make the http request
+      let response: any;
+      this.customerService.updateCustomerHttp(this.updatingCustomer).subscribe(
+        data => {
+          response = data;
+          this.customerService.displayInfoBar("success", "updateCustomer");
+          this.customerService.navigate("customer/list");
+        }
+      );
+
+      return customer;
     }
-    return true;
   }
 }

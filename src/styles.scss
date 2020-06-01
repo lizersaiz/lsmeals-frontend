@@ -68,21 +68,31 @@ button {
 .sub-navbar-button {
 
   width: 100%;
-  margin-top: 0.8rem;
-  color: #495057;
-  background-color: white;
-  border: 1px solid black;
+  color: #f0f3f5;
+  background-color: #5f5e65;
+  border: 2px groove rgb(85, 95, 114);
 }
 
-button:hover, button:active, button:focus,
-input:hover, input:active, input:focus,
-select:hover, select:active, select:focus {
+button:hover, button:active,
+input:hover, input:active,
+select:hover, select:active {
 
-  border-color: blue;
-  box-shadow: 3px 3px 4px rgb(123, 167, 248), -3px -3px 4px rgb(123, 167, 248);
-  transition: border-color .5s ease-in-out, box-shadow .5s ease-in-out;
-  outline: 0;
+  outline: none;
+  //border-color: rgb(3, 3, 104);
+  box-shadow: 3px 3px 6px rgb(123, 167, 248), -3px -3px 6px rgb(123, 167, 248);
+  transition: /*border-color .5s ease-in-out, */box-shadow .35s ease-in-out;
 }
+
+button:focus,
+input:focus,
+select:focus {
+
+  outline: none;
+  border-color:  rgb(255, 255, 255);
+  box-shadow: 5px 5px 4px rgb(123, 167, 248), -5px -5px 4px rgb(123, 167, 248);
+  transition: border-color .35s ease-in-out, box-shadow .35s ease-in-out;
+}
+
 /*
 input:valid {
 
@@ -116,3 +126,6 @@ input:invalid {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';

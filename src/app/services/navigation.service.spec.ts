@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 
-import { NabvarService } from './nabvar.service';
+import { NavigationService } from './navigation.service';
 import { RouterTestingModule } from '@angular/router/testing';
 
-describe('NabvarService', () => {
-  let service: NabvarService;
+describe('NavigationService', () => {
+  let service: NavigationService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -13,7 +13,7 @@ describe('NabvarService', () => {
         RouterTestingModule
       ]
     });
-    service = TestBed.inject(NabvarService);
+    service = TestBed.inject(NavigationService);
   });
 
   it('should be created', () => {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NabvarService } from 'src/app/services/nabvar.service';
+import { NavigationService } from 'src/app/services/navigation.service';
 import { SideNavbarItem } from 'src/app/common/side-navbar-item';
 
 @Component({
@@ -11,7 +11,7 @@ export class NavbarSideComponent implements OnInit {
 
   sideNavbarItems: SideNavbarItem[] = [];
 
-  constructor(private navbarService: NabvarService) { }
+  constructor(private navigationService: NavigationService) { }
 
   ngOnInit(): void {
 
@@ -20,14 +20,14 @@ export class NavbarSideComponent implements OnInit {
 
   navbarServiceListener(){
 
-    this.sideNavbarItems = this.navbarService.sideNavbarItemsUser;
-    this.navbarService.sideNavbarItems.subscribe(
+    this.sideNavbarItems = this.navigationService.sideNavbarItemsCustomer;
+    this.navigationService.sideNavbarItems.subscribe(
       data => this.sideNavbarItems = data
     );
   }
 
   openOption(sideNavbarItem: string){
 
-    this.navbarService.routeToSideNavbarOption(sideNavbarItem);
+    this.navigationService.routeTo(sideNavbarItem);
   }
 }

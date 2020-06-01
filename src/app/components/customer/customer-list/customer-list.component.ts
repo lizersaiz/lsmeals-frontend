@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Customer } from 'src/app/common/customer';
 import { CustomerService } from 'src/app/services/customer.service';
 import { ModalPopupComponent } from '../../miscelaneous/modal-popup/modal-popup.component';
-import { PaginatorService } from 'src/app/services/paginator.service';
 
 @Component({
   selector: 'app-customer-list',
@@ -16,14 +15,16 @@ export class CustomerListComponent implements OnInit {
   customers: Customer[] = [];
 
 
-  constructor(private customerService: CustomerService,
-              private paginatorService: PaginatorService) {}
+  constructor(private customerService: CustomerService) {}
 
   ngOnInit(): void {
 
     this.listCustomers();
   }
 
+  /**
+   * Get the customer list by calling customer service
+  */
   listCustomers(){
 
     this.customerService.getCustomersHttpPaginate(true);
@@ -34,11 +35,20 @@ export class CustomerListComponent implements OnInit {
     )
   }
 
-  updateCustomer(customer: Customer){
+  /**
+   * Ask customer service to route to update customer component
+   * @param customerId The customer Id
+   */
+  updateCustomer(customerId: number){
 
-    this.customerService.navigateToUpdateCustomer(customer);
+    let url = `customer/update/${customerId}`
+    this.customerService.navigate(url);
   }
 
+  /**
+   * Delete the customer after user verification through a modal window
+   * @param customer The customer
+   */
   deleteCustomer(customer: Customer){
 
     this.modalPopupComponent.openVerticallyCentered(customer).then(

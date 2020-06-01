@@ -16,7 +16,7 @@ import { InfoBarComponent } from './components/miscelaneous/info-bar/info-bar.co
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // modal pop up component from ng bootstrap
-import { NgbModalModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalModule, NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // modal popup component wrapper and templates
 import { ModalPopupComponent, ModalPopupContent } from './components/miscelaneous/modal-popup/modal-popup.component';
 
@@ -36,16 +36,17 @@ import { DatePickerComponent } from './components/miscelaneous/date-picker/date-
 import { MatPaginatorModule } from '@angular/material/paginator';
 // angular material component wrapper
 import { PaginatorComponent } from './components/miscelaneous/paginator/paginator.component';
+import { CustomerWriteComponent } from './components/customer/customer-write/customer-write.component';
 
 const routes: Routes = [
   // Info bar
-  //{path: "", component: InfoBarComponent, outlet: "infoBar"},
+  // {path: "", component: InfoBarComponent, outlet: "infoBar"},
 
   {path: "welcome", component:WelcomeComponent},
   {path: "meal/list", component:MealListComponent},
   {path: "customer/list", component:CustomerListComponent},
   {path: "customer/create", component:CustomerCreateComponent},
-  {path: "customer/update", component:CustomerUpdateComponent},
+  {path: "customer/update/:customerId", component:CustomerUpdateComponent},
   {path: "statistics/view", component:StatisticsView},
   {path: "", component:WelcomeComponent},
   {path: "**", component:WelcomeComponent}
@@ -68,6 +69,7 @@ const routes: Routes = [
     ChartComponent,
     DatePickerComponent,
     PaginatorComponent,
+    CustomerWriteComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,6 +84,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     MDBBootstrapModule.forRoot(),
     MatPaginatorModule,
+    NgbModule,
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [],
